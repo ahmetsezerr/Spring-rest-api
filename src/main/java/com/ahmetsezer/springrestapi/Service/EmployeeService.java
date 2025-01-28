@@ -13,15 +13,18 @@ public class EmployeeService {
     @Autowired //ile enjekte ettim
     private EmployeeRepository employeeRepository;// benim Service katmanından da repository katmamına geçiş yapmam lazım
 
-    public List<Employee>getAllEmployeeList(){
-       // employeeRepository.getAllEmployeeList(); // diyorum ki service benim employeeRepositorym var sen onun içindeki getAllEmployees() metoduna git diyor.
+    public List<Employee>getAllEmployeeList() {
+        // employeeRepository.getAllEmployeeList(); // diyorum ki service benim employeeRepositorym var sen onun içindeki getAllEmployees() metoduna git diyor.
         return employeeRepository.getAllEmployeeList();
-
-
-        }
-
-
+    }
     public Employee getEmployeeById(String id) {
         return employeeRepository.getEmployeeById(id);
+    }
+    public List<Employee> getEmployeeWithParams(String firstName, String lastName) {
+        return employeeRepository.getEmployeeWithParams(firstName, lastName);
+    }
+
+    public Employee saveEmployee(Employee newEmployee) {
+        return employeeRepository.saveEmployee(newEmployee);
     }
 }

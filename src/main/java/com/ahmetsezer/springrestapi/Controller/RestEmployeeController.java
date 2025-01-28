@@ -17,7 +17,7 @@ public class RestEmployeeController {
 
 
 
-    @GetMapping(path = "/employee-list")
+    @GetMapping(path = "/list")
     public List<Employee> getAllEmployees(){ // bütün employee listesini getir.
         //employeeService.getAllEmployeeList();//Controller Sen bu isteği aldın ve bu isteği service e yönlendir
         //employeeservice adındaki getEmployeeList adındaki fonksiyona git diyorum.
@@ -25,14 +25,24 @@ public class RestEmployeeController {
 
         return employeeService.getAllEmployeeList();
     }
-    @GetMapping(path ="employee-list/{id}")
+    @GetMapping(path ="list/{id}")
     public Employee getEmployeeById(@PathVariable (name = "id", required = true) String id){
         return employeeService.getEmployeeById(id);
     }
 
-    @GetMapping(path = "employee-list-with-params")
-    public List<Employee> getEmployeeWithParams(@RequestParam(name = "firstName")String firstName, @RequestParam(name = "lastName")String lastName) {
-        System.out.println(firstName + " " + lastName);
-        return null;
+    @GetMapping(path = "/with-params")
+    public List<Employee> getEmployeeWithParams(@RequestParam(name = "firstName",required = false)String firstName, @RequestParam(name = "lastName",required = false)String lastName) {
+        return employeeService.getEmployeeWithParams(firstName, lastName);
+    }
+
+
+    @PostMapping(path = "/save-employee")
+    public Employee saveEmployee(@RequestBody Employee newEmployee){// yeni bir işçi kaydediyoruz
+        return employeeService.saveEmployee(newEmployee);
+    }
+
+    @DeleteMapping("/delete-employee/{id}")
+    public boolean deleteEmployee(@PathVariable (name = "id")String id){
+       return true;
     }
 }
